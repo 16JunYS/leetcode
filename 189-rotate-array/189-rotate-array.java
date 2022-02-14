@@ -3,19 +3,17 @@ class Solution {
         int len = nums.length;
         int i=0;
         int idx = len - k % len;
-        int[] tmp = Arrays.copyOf(nums, idx);
-        boolean isT = false;
-        while(i < len) {
-            if (idx == len) {
-                idx = 0;
-                isT = true;
-            }
-            if (isT) {
-                nums[i++] = tmp[idx++];
-            }
-            else {
-                nums[i++] = nums[idx++];
-            }
+        reverse(nums, 0, idx-1);
+        reverse(nums, idx, len-1);
+        reverse(nums, 0, len-1);
+    }
+    void reverse(int[] nums, int left, int right) {
+        while(left < right) {
+            int tmp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = tmp;
+            left++;
+            right--;
         }
     }
 }
